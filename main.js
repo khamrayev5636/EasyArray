@@ -27,11 +27,12 @@
 // ================================================================================================
 
 var elForm = document.querySelector(".form");
-var elInput = elForm.querySelector(".form__input");
-var elInputLast = elForm.querySelector(".form__input-last");
-var elInputTel = elForm.querySelector(".form__input-tell");
 var elSelect = elForm.querySelector(".form__select");
-var list = document.querySelector(".list");
+var elFirstName = elForm.querySelector(".form__input");
+var elSecondName = elForm.querySelector(".form__input-last");
+var elTell = elForm.querySelector(".form__input-tell");
+var text = document.querySelector(".list");
+
 
 var array = [];
 
@@ -39,36 +40,36 @@ elForm.addEventListener("submit" , function(evt){
     evt.preventDefault();
     
     var obj = {
-        country:elSelect.value,
-        name: elInput.value,
-        lastName:elInputLast.value,
-        telNumber: elInputTel.value
+        firstName: elFirstName.value,
+        lastName: elSecondName.value,
+        phoneNumber: elTell.value,
+        selectCountry: elSelect.value,
     };
     
     array.push(obj);
-
+    
     elForm.reset();
-    list.textContent = "";
+    text.textContent = "";
     
-    for(var i = 0; i < array.length; i++){
-        
+    for(var i = 0; i < array.length; i++){  
         var item = document.createElement("li");
-
-        var elCountry = document.createElement("h2");
-        elCountry.textContent = array[i].country;
-        item.appendChild(elCountry);
         
-        var title = document.createElement("h4");
-        title.textContent = array[i].name + " " + array[i].lastName;
+        var titleCountry = document.createElement("h2");
+        titleCountry.textContent = array[i].selectCountry;
+        titleCountry.style.color = "red"
+        item.appendChild(titleCountry);
+        
+        var title = document.createElement("h3");
+        title.textContent = array[i].firstName + " " + array[i].lastName;
+        title.style.fontStyle = "italic"
+        title.style.fontWeight = "900"
         item.appendChild(title);
-
-
-        var tellNumberTxt = document.createElement("p");
-        tellNumberTxt.textContent = array[i].telNumber;
-        item.appendChild(tellNumberTxt);
         
-        list.appendChild(item);
-    }
-    
-});
+        var phone = document.createElement("h4");
+        phone.textContent = array[i].phoneNumber;
+        phone.style.color = "green"
+        item.appendChild(phone);
 
+        text.appendChild(item);
+    }
+})
